@@ -16,15 +16,17 @@ export function NoteLenght({ notes }) {
   );
 }
 
-export function NoteSort() {
+export function NoteSort({ sortBy, onSortNote }) {
   return (
     <div className="w-full h-auto flex justify-center items-center">
-      <select className="w-2/4 bg-slate-400 text-white rounded-md py-1 flex sm:px-4 justify-center items-center">
-        <option disabled className="font-bold">
-          sort
-        </option>
-        <option>Newest</option>
-        <option>Oldest</option>
+      <select
+        onChange={onSortNote}
+        value={sortBy}
+        className="w-2/4 bg-slate-400 text-white rounded-md py-1 flex sm:px-4 justify-center items-center"
+      >
+        <option value="Completed">Completed</option>
+        <option value="Newest">Newest</option>
+        <option value="Oldest">Oldest</option>
       </select>
     </div>
   );

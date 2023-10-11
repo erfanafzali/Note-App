@@ -1,19 +1,35 @@
-import { DocumentCheckIcon, TrashIcon } from "@heroicons/react/24/solid";
+import { TrashIcon } from "@heroicons/react/24/solid";
 import Message from "./Message";
 
-function NoteList({ notes, onDeleteNote, onCheckNote }) {
+function NoteList({ notes, onDeleteNote, onCheckNote, sortBy }) {
   const allNotes = notes.length;
   if (!allNotes) {
     return (
       <Message className="w-full h-auto">
-        <p className="w-full h-auto flex flex-col justify-center items-center px-2 sm:px-3 md:px-4 lg:px-5 pb-2 sm:pb-3 md:pb-4 lg:pb-5 text-slate-400 text-xs sm:text-md md:text-lg lg:text-xl">No Notes has already been added 😩</p>
+        <p className="w-full h-auto flex flex-col justify-center items-center px-2 sm:px-3 md:px-4 lg:px-5 pb-2 sm:pb-3 md:pb-4 lg:pb-5 text-slate-400 text-xs sm:text-md md:text-lg lg:text-xl">
+          No Notes has already been added 😩
+        </p>
       </Message>
     );
   }
+  
+  let sortedNotes = notes;
+  if (sortBy === "Newest")
+    sortedNotes = [...notes].sort(
+      (a, b) => new Date(a.createdAt) - new Date(b.createdAt)
+    );
+  if (sortBy === "Oldest")
+    sortedNotes = [...notes].sort(
+      (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
+    );
+  if (sortBy === "Completed")
+    sortedNotes = [...notes].sort(
+      (a, b) => Number(b.completed) - Number(a.completed)
+    );
 
   return (
     <div className="w-full h-auto">
-      {notes.map((note) => (
+      {sortedNotes.map((note) => (
         <Notes
           key={note.id}
           note={note}

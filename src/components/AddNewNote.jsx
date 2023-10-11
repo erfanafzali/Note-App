@@ -1,4 +1,5 @@
 import { useState } from "react";
+import toast from "react-hot-toast";
 
 function AddNewNote({ onAddNote }) {
   const [title, setTitle] = useState("");
@@ -6,7 +7,14 @@ function AddNewNote({ onAddNote }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (!title || !description) return null;
+    const notify = () => toast("Please write your note😁");
+    const lenghtError = () => toast("Please enter more characters🙃");
+    console.log(notify);
+    if (!title || !description) {
+      return notify();
+    } else if (title.length < 3 || description < 5) {
+      return lenghtError();
+    }
     const newNote = {
       title,
       description,

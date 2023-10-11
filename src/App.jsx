@@ -4,9 +4,11 @@ import NoteStatus from "./components/NoteStatus";
 import NoteList from "./components/NoteList";
 import AddNewNote from "./components/AddNewNote";
 import { useState } from "react";
+import { Toaster } from "react-hot-toast";
 
 function App() {
   const [notes, setNotes] = useState([]);
+  const [sortBy, setSortBy] = useState("");
 
   const handleAddNote = (newNote) => {
     setNotes((prevNotes) => [...prevNotes, newNote]);
@@ -27,14 +29,19 @@ function App() {
 
   return (
     <div className="container mx-auto">
+      <Toaster />
       <Navbar notes={notes}>
         <NoteLenght notes={notes} />
-        <NoteSort />
+        <NoteSort
+          onSortNote={(e) => setSortBy(e.target.value)}
+          sortBy={sortBy}
+        />
       </Navbar>
       <NoteStatus notes={notes} onCheckNote={handleCheckNote} />
       <Main>
         <AddNewNote onAddNote={handleAddNote} />
         <NoteList
+          sortBy={sortBy}
           notes={notes}
           onDeleteNote={handleDeleteNote}
           onCheckNote={handleCheckNote}
