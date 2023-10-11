@@ -1,6 +1,16 @@
 import { DocumentCheckIcon, TrashIcon } from "@heroicons/react/24/solid";
+import Message from "./Message";
 
 function NoteList({ notes, onDeleteNote, onCheckNote }) {
+  const allNotes = notes.length;
+  if (!allNotes) {
+    return (
+      <Message className="w-full h-auto">
+        <p className="w-full h-auto flex flex-col justify-center items-center px-2 sm:px-3 md:px-4 lg:px-5 pb-2 sm:pb-3 md:pb-4 lg:pb-5 text-slate-400 text-xs sm:text-md md:text-lg lg:text-xl">No Notes has already been added 😩</p>
+      </Message>
+    );
+  }
+
   return (
     <div className="w-full h-auto">
       {notes.map((note) => (
@@ -32,11 +42,11 @@ function Notes({ note, onDeleteNote, onCheckNote }) {
             note.completed ? "line-through" : ""
           }`}
         >
-          <div className="w-full h-auto">
-            <h2 className="text-black font-bold text-sm sm:text-md md:text-lg lg:text-xl">
+          <div className="w-full h-auto flex justify-center items-center flex-col">
+            <h2 className="text-black font-bold text-sm sm:text-md md:text-lg lg:text-xl line-brak w-full">
               {note.title}
             </h2>
-            <p className="text-slate-800 text-[10px] sm:text-sm md:text-md lg:text-lg">
+            <p className="text-slate-800 text-[10px] sm:text-sm md:text-md lg:text-lg w-full line-brak">
               {note.description}
             </p>
           </div>

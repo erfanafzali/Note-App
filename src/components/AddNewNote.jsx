@@ -23,7 +23,7 @@ function AddNewNote({ onAddNote }) {
   return (
     <div className="w-full">
       <form
-        onSubmit={handleSubmit} 
+        onSubmit={handleSubmit}
         action=""
         className="flex flex-col justify-center items-center gap-y-2 sm:gap-y-3 md:gap-y-4 lg:gap-y-5 w-full"
       >
@@ -31,14 +31,14 @@ function AddNewNote({ onAddNote }) {
           value={title}
           onChange={(e) => setTitle(e.target.value)}
           type="text"
-          className="rounded-lg bg-slate-300 placeholder:text-xs placeholder:sm:text-sm placeholder:md:text-md placeholder:lg:text-lg w-full lg:w-3/4 md:w-3/4 px-2 sm:py-1 md:py-2 lg:py-3"
+          className="rounded-lg bg-slate-300 placeholder:text-xs placeholder:sm:text-sm placeholder:md:text-md placeholder:lg:text-lg w-full lg:w-3/4 md:w-3/4 px-2 sm:py-1 md:py-2 lg:py-3 "
           placeholder="Note title..."
         />
         <input
           value={description}
           onChange={(e) => setDescription(e.target.value)}
           type="text"
-          className="rounded-lg bg-slate-300 placeholder:text-xs placeholder:sm:text-sm placeholder:md:text-md placeholder:lg:text-lg w-full lg:w-3/4 md:w-3/4 px-2 sm:py-1 md:py-2 lg:py-3"
+          className="rounded-lg bg-slate-300 placeholder:text-xs placeholder:sm:text-sm placeholder:md:text-md placeholder:lg:text-lg w-full lg:w-3/4 md:w-3/4 px-2 sm:py-1 md:py-2 lg:py-3 "
           placeholder="Note description..."
         />
         <button
