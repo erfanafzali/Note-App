@@ -5,9 +5,10 @@ import NoteList from "./components/NoteList";
 import AddNewNote from "./components/AddNewNote";
 import { useState } from "react";
 import { Toaster } from "react-hot-toast";
+import useLocalStorage from "./assets/hooks/useLocalStorage";
 
 function App() {
-  const [notes, setNotes] = useState([]);
+  const [notes, setNotes] = useLocalStorage("Notes", []);
   const [sortBy, setSortBy] = useState("");
 
   const handleAddNote = (newNote) => {
