@@ -1,3 +1,5 @@
+import { useNotes } from "../context/NotesContext";
+
 function Navbar({ children }) {
   return (
     <div className="w-full h-20 flex justify-around items-center border-b-white border-b-4">
@@ -8,7 +10,8 @@ function Navbar({ children }) {
 
 export default Navbar;
 
-export function NoteLenght({ notes }) {
+export function NoteLenght() {
+  const notes = useNotes();
   return (
     <h1 className="font-bold lg:text-3xl md:text-2xl sm:text-lg text-lg text-slate-300 w-full text-center">
       My Notes ({[...notes].length})

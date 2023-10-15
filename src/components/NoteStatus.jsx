@@ -1,4 +1,7 @@
-function NoteStatus({ notes }) {
+import { useNotes } from "../context/NotesContext";
+
+function NoteStatus() {
+  const notes = useNotes();
   const allNotes = notes.length;
   const completedNotes = notes.filter((note) => note.completed).length;
   const unCompletedNotes = allNotes - completedNotes;

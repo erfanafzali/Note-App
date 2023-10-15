@@ -1,7 +1,9 @@
 import { TrashIcon } from "@heroicons/react/24/solid";
+import { useDispatchNotes, useNotes } from "../context/NotesContext";
 import Message from "./Message";
 
-function NoteList({ notes, onDeleteNote, onCheckNote, sortBy }) {
+function NoteList({ sortBy }) {
+  const notes = useNotes();
   const allNotes = notes.length;
   if (!allNotes) {
     return (
@@ -12,7 +14,7 @@ function NoteList({ notes, onDeleteNote, onCheckNote, sortBy }) {
       </Message>
     );
   }
-  
+
   let sortedNotes = notes;
   if (sortBy === "Newest")
     sortedNotes = [...notes].sort(
@@ -30,12 +32,7 @@ function NoteList({ notes, onDeleteNote, onCheckNote, sortBy }) {
   return (
     <div className="w-full h-auto">
       {sortedNotes.map((note) => (
-        <Notes
-          key={note.id}
-          note={note}
-          onDeleteNote={onDeleteNote}
-          onCheckNote={onCheckNote}
-        />
+        <Notes key={note.id} note={note}  />
       ))}
     </div>
   );
@@ -43,7 +40,8 @@ function NoteList({ notes, onDeleteNote, onCheckNote, sortBy }) {
 
 export default NoteList;
 
-function Notes({ note, onDeleteNote, onCheckNote }) {
+function Notes({ note }) {
+  const dispatch = useDispatchNotes();
   const options = {
     year: "numeric",
     month: "long",
@@ -67,16 +65,19 @@ function Notes({ note, onDeleteNote, onCheckNote }) {
             </p>
           </div>
           <div className="flex justify-center items-center gap-x-1 sm:gap-x-2 md:gap-x-3 lg:gap-x-4">
-            <button onClick={() => onDeleteNote(note.id)}>
+            <button onClick={() => dispatch({ type: "delete", payload: note.id })}>
               <TrashIcon className="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6 lg:w-8 lg:h-8 text-red-500" />
             </button>
             <input
+              type="checkbox"
               name={note.id}
               id={note.id}
               value={note.id}
               checked={note.completed}
-              onChange={onCheckNote}
-              type="checkbox"
+              onChange={(e) => {
+                const noteId = Number(e.target.value);
+                dispatch({ type: "complete", payload: noteId }); 
+              }}
               className={
                 "w-3 h-3 sm:w-4 sm:h-4 md:w-5 md:h-5 lg:w-7 lg:h-7 accent-green-600"
               }
